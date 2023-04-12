@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Plants Page</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="header">
+		<h1>Plant Page</h1>
+	</div>
+	<div id="navigation">
+		<a href="pplog.html">Personal Plant Log</a>
+		<a href="title.html">Brought to You by</a>
+		<a href="home.html">Home</a>
+	</div>
+	<div id="content">
+
+	</div>
+
+
+
+
+	<footer> <p> Plant Page</p></footer>
+</body>
+</html>
