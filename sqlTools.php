@@ -20,12 +20,12 @@ function closeConnection($conn){
 		die(mysqli_error($conn));
 	}
 }
-function addProduct($product){
+function addPersonalPlant($pplant){
 	$conn = getConnection();
 	
 	$query = <<<QUERY
-	INSERT INTO product
-	(internalId, name, vendor, vendorPhone, quantity, lastPurchased)
+	INSERT INTO PersonalPlant
+	(Email, PPName, HomeEnv, SciName)
 	VALUES(?,?,?,?,?,?);
 	QUERY;
 

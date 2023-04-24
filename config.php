@@ -1,6 +1,6 @@
 <?php
 $servername = 'localhost';
-$username = 'dwelch';
-$password = 'wixy~4Hic';
-$dbname = 'dwelch';
+$username = 'plantpage';
+$password = 'egaptnalp3420S23';
+$dbname = 'plantpage';
 ?>
