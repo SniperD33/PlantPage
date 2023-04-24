@@ -1,0 +1,47 @@
+header{
+	padding: 10px;
+	width:100%;
+}
+h1{
+	text-align: center;
+	font-family: fantasy;
+	font-weight: bolder;
+}
+h2{
+	text-align: center;
+	font-family: fantasy;
+	font-weight: lighter;
+}
+body{
+	width: 100%;
+	height: 100%;
+}
+div{
+	width: auto;
+	border: 2.5px solid black;
+	padding: 10px;
+	margin: 20px;
+}
+footer{
+	text-align: center;
+	padding: 1px;
+	background-color: green;
+	color: white;
+	font-family: fantasy;
+	font-weight: lighter;
+	border: 5px solid black;
+}
+.content{
+	float: right;
+	height: fit-content;
+	width: 100%;
+	border 1px solid black;
+	outline: 5px;
+	outline-style: double;
+	margin: 5px;
+}
+.allImages{
+	float: left;
+	width: 15%;
+}
+
