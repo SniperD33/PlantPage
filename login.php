@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+require_once("sqlTools.php");
 
 
 function get_admin($email) {
