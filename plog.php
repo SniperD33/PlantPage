@@ -1,5 +1,5 @@
 <?php
-require_once("config.php");
+require_once("sqlTools.php");
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +21,8 @@ require_once("config.php");
 	<div id="content">
 
 	<?php
-	$db = get_mysqli_connection();
+	
+	$db = getConnection();
 	$query = $db->prepare("SELECT * FROM Plant");
 	$query->execute();
 
