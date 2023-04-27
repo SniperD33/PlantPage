@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php
+require_once("config.php");
+
+if(empty($_SESSION["logged_in"])) {
+    header("Location: login.php");  
+}
+
+if ($_SESSION["logged_in"] == false) {
+    header("Location: login.php");
+}
+?>
+
+
 <html lang="en">
 <head>
 	<meta charset="utf-8">
