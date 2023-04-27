@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+require_once("sqlTools.php");
 
 if(empty($_SESSION["logged_in"])) {
     header("Location: login.php");  
