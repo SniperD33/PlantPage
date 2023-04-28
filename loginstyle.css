@@ -24,6 +24,7 @@ body {
 	position: relative;
 	width: 100%;
 	margin: 5px 0;
+	
 }
 
 
@@ -33,7 +34,7 @@ body {
 	right: 0;
 	bottom: 0;
 	width: 100%;
-	
+	text-align: center;
 
 }
 
@@ -42,6 +43,13 @@ body {
 	color: white;
 	border-style: none;
 }
+
+#login:active {
+	background-color: #225c40;
+	color: white;
+
+}
+
 
 ::placeholder {
 	text-align: center;
