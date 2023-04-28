@@ -2,7 +2,6 @@
 require_once("config.php");
 require_once("sqlTools.php");
 
-
 function get_admin($email) {
     $db = get_pdo_connection();
     $query = $db->prepare("SELECT * FROM Admin WHERE Email = ?");
@@ -78,6 +77,41 @@ if (isset($_POST["Login"])) {
             $_SESSION["login_error"] = "Invalid email and password combination.";
         }
     }
+    /*else {
+        $db = get_pdo_connection();
+        $query = $db->prepare("SELECT HashPass FROM AccountHolder WHERE Email = ?");
+        $query->bindParam(1, $login_email, PDO::PARAM_STR);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($results) > 0) {
+            $hash = $results[0]["HashPass"];
+            // first row in results for column HashPass
+
+            if (password_verify($login_password, $hash)) {
+                $_SESSION["logged_in"] = true;
+                $_SESSION["email"] = $login_email;
+
+                $admin = get_admin($login_email);
+
+                
+                if (count($admin) > 0) {
+                    $_SESSION["is_admin"] = true;
+                    //$_SESSION["managed_dept"] = $admin[0];
+                }
+                else {
+                    $_SESSION["is_admin"] = false;
+                }
+                header("Location: home.php");
+            }
+            else { 
+                $_SESSION["login_error"] = "Invalid email and password combination.";
+            }
+        }
+        else {
+            $_SESSION["login_error"] = "Invalid email and password combination.";
+        }
+    }*/
 }
 ?>
 
@@ -85,21 +119,25 @@ if (isset($_POST["Login"])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?= $PROJECT_NAME . " Login Page" ?></title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title><?= $PROJECT_NAME . " Login" ?></title>
+    <link rel="stylesheet" type="text/css" href="loginstyle.css">
 </head>
 <body>
-<h1><?= $PROJECT_NAME . " Login"?></h1>
 
+
+<div id="form_block">
+<h1><?= $PROJECT_NAME . " Login"?></h1>
 <?php
 $login_form = new PhpFormBuilder();
 $login_form->set_att("method", "POST");
 $login_form->add_input("Email", array(
     "type" => "text",
+    "placeholder" => "Email",
     "required" => true
 ), "login_email");
 $login_form->add_input("Password", array(
     "type" => "password",
+    "placeholder" => "Password",
     "required" => true
 ), "login_password");
 $login_form->add_input("Login", array(
@@ -115,9 +153,11 @@ if (isset($_SESSION["login_error"])) {
 }
 
 ?>
+</div>
 
+</div id="plant-logo">
+<img src="">
+</div>
 
-
-<footer> <p> Plant Page</p></footer>
 </body>
-</html>
+</html> 
