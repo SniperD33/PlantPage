@@ -1,5 +1,13 @@
 <?php
 require_once("sqlTools.php");
+
+if(empty($_SESSION["logged_in"])) {
+    header("Location: login.php");  
+}
+
+if ($_SESSION["logged_in"] == false) {
+    header("Location: login.php");
+}
 ?>
 
 <!DOCTYPE html>
