@@ -1,0 +1,50 @@
+body {
+	align-items: center;
+	background-color: #1a3d2c;
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+}
+
+#form_block {
+	
+	background-color: #629e74;
+	border-radius: 20px;
+	box-sizing: border-box;
+	height: 400px;
+	padding: 20px;
+	font-family: Roboto, Arial, sans-serif;
+	color: white;
+
+	
+}
+
+.form_field_wrap {
+	height: 50px;
+	position: relative;
+	width: 100%;
+	margin: 5px 0;
+}
+
+
+#login, #login_password, #login_email {
+	height: 50px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	
+
+}
+
+#login {
+	background-color: #1a3d2c;
+	color: white;
+	border-style: none;
+}
+
+::placeholder {
+	text-align: center;
+	
+}
+
