@@ -16,21 +16,66 @@ body{
 	width: 100%;
 	height: 100%;
 }
+
+/*
 div{
 	width: auto;
 	border: 2.5px solid black;
 	padding: 10px;
 	margin: 20px;
 }
-footer{
-	text-align: center;
-	padding: 1px;
-	background-color: green;
-	color: white;
-	font-family: fantasy;
-	font-weight: lighter;
-	border: 5px solid black;
+*/
+
+
+/* navigation bar styling */ 
+
+.wrapper .sidenav {
+	height: 100%;
+	width: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding-top: 40px;
+	background-color: #225c40;
+	list-style: none;
 }
+
+.sidenav li a {
+	padding: 8px;
+	font-size: 18px;
+	display: block;
+	text-decoration: none;
+	color: white;
+}
+
+
+.wrapper .sidenav li a:hover,
+.wrapper .sidenav li a.active{
+    color: #1a3d2c;
+    background:white;
+    border-right: 2px solid rgb(5, 68, 104);
+}
+
+
+/* footer styling */ 
+
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: black;
+	text-align: right;
+}
+
+
+footer p {
+	margin-right: 20px;
+}
+
+
+/* content styling */
+
 .content{
 	float: right;
 	height: fit-content;
