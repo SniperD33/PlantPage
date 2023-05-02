@@ -22,11 +22,15 @@ if ($_SESSION["logged_in"] == false) {
 	<div id="header">
 		<h1>Plant Page</h1>
 	</div>
-	<div id="navigation">
-		<a href="plog.html">Plant Dictionary</a>
-		<a href="pplog.html">Personal Plant Log</a>
-		<a href="title.html">Brought to You by</a>
+	
+	<div class="wrapper">
+		<div class="sidenav" >
+				<li><a href="plog.php">Plant Dictionary</a></li>
+				<li><a href="pplog.php">Personal Plant Page</a></li>
+				<li><a href="logout.php">Log Out</a></li>
+		</div> 
 	</div>
+	
 	<div id="content">
 
 	</div>
@@ -34,6 +38,6 @@ if ($_SESSION["logged_in"] == false) {
 
 
 
-	<footer> <p> Plant Page</p></footer>
+	<footer> <p> Plant Page </p></footer>
 </body>
 </html>
