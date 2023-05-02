@@ -44,9 +44,10 @@ footer{
 	float: left;
 	width: 15%;
 }
-.ploginfo {
+#info {
 	display: none;
 }
-h1:hover + .ploginfo {
+img {
+	margin: auto;
 	display: block;
 }

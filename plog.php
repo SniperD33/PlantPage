@@ -16,6 +16,7 @@ if ($_SESSION["logged_in"] == false) {
 	<meta charset="utf-8">
 	<title>Plants Page</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="functions.js"></script>
 </head>
 <body>
 	<div id="header">
@@ -38,11 +39,10 @@ if ($_SESSION["logged_in"] == false) {
 	$rows = $result->fetch_all(MYSQLI_ASSOC);
 
 	echo buildGrid($rows);
+
 	?>
 
 	</div>
-
-
 
 
 	<footer> <p> Plant Page</p></footer>
