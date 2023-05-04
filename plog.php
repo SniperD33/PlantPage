@@ -36,9 +36,21 @@ if ($_SESSION["logged_in"] == false) {
 	$query->execute();
 
 	$result = $query->get_result();
-	$rows = $result->fetch_all(MYSQLI_ASSOC);
+	$rowsPlant = $result->fetch_all(MYSQLI_ASSOC);
 
-	echo buildGrid($rows);
+	$query = $db->prepare("SELECT * FROM CareInformation");
+	$query->execute();
+
+	$result = $query->get_result();
+	$rowsCare = $result->fetch_all(MYSQLI_ASSOC);
+
+	$query = $db->prepare("SELECT * FROM CommonPlantProbs");
+	$query->execute();
+
+	$result = $query->get_result();
+	$rowsProbs = $result->fetch_all(MYSQLI_ASSOC);
+
+	echo buildGrid($rowsPlant, $rowsCare, $rowsProbs);
 	?>
 
 	</div>

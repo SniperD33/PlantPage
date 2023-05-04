@@ -1,11 +1,11 @@
 <?php
 require_once("sqlTools.php");
 
-function buildGrid($data) {
+function buildGrid($dataPlant, $dataCare, $dataProb) {
     $gridStr = "";
 
     $i = 1;
-    foreach($data as $row) {
+    foreach($dataPlant as $row) {
         $gridStr .= "<div class ='plogtitle'> ";
         $infoStr = "<div id='info$i' class='ploginfo' style='display: none'>";
         $sciName = $row['SciName'];
@@ -19,14 +19,35 @@ function buildGrid($data) {
             else if($columnName != "Image")
                 $infoStr .= "$columnName: $columnValue<br>";
         }
+
+        $careStr = "<h3>Care Info</h3>";
+        $probStr = "<h3>Common Problems</h3>";
+        foreach($dataCare as $row2) {
+            if ($row2["SciName"]==$sciName) {
+                $careID = $row2['CareID'];
+                foreach($row2 as $columnName => $columnValue) {
+                    if ($columnName != "CareID" && $columnName != "SciName") {
+                        $careStr .= "$columnName: $columnValue<br>";    
+                    }
+                }
+                foreach($dataProb as $row3) {
+                    if ($row3["CareID"]==$careID) {
+                        $careID2 = $row3['CareID'];
+                        foreach($row3 as $columnName => $columnValue) {
+                            if ($columnName != "CareID") {
+                                $probStr .= "$columnName: $columnValue<br>";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $infoStr .= $careStr;
+        $infoStr .= $probStr;
+
         $i++;
-        // $sciName = $row['SciName'];
-        // $viewFormUpdate = "
-        // <form method='post' action='functions.php'>
-        // <input type='submit' name='UpdateViewCount'>
-        // <input type='hidden' name='SciName' value='$sciName'>
-        // </form>
-        // ";
+        
 
         $infoStr .= "</div>";
         $gridStr .= "$infoStr</div>\n    ";
@@ -52,4 +73,15 @@ if (isset($_POST["UpdateViewCount"]) && isset($_POST["SciName"])) {
     }
 }
 
+        // $sciName = $row['SciName'];
+        // $viewFormUpdate = "
+        // <form method='post' action='functions.php'>
+        // <input type='submit' name='UpdateViewCount'>
+        // <input type='hidden' name='SciName' value='$sciName'>
+        // </form>
+        // ";
+
+        //Below information, break and add header for careinfo, and commonproblems tables
+
 ?>
+
