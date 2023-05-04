@@ -39,7 +39,6 @@ if ($_SESSION["logged_in"] == false) {
 	$rows = $result->fetch_all(MYSQLI_ASSOC);
 
 	echo buildGrid($rows);
-
 	?>
 
 	</div>

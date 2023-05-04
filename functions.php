@@ -1,5 +1,5 @@
 <?php
-require_once("config.php");
+require_once("sqlTools.php");
 
 function buildGrid($data) {
     $gridStr = "";
@@ -7,16 +7,27 @@ function buildGrid($data) {
     $i = 1;
     foreach($data as $row) {
         $gridStr .= "<div class ='plogtitle'> ";
-        $infoStr = "<div id='info' class='ploginfo'>";
+        $infoStr = "<div id='info$i' class='ploginfo' style='display: none'>";
+        $sciName = $row['SciName'];
         foreach($row as $columnName => $columnValue) {
             if($columnName == "Image" && $columnValue != NULL)
-                $gridStr .= sprintf("<img id='img$i' src=$columnValue onclick='showDiv();'>");
+                $gridStr .= sprintf("<img id='img$i' src=$columnValue onclick='showDivViewPlants(\"info$i\", \"$sciName\");'>");
             else if($columnName == "SciName")
                 $gridStr .= sprintf("<h1>$columnValue</h1>");
+            else if($columnName == "ViewCount")
+                $infoStr .= "<span class=\"viewcount\">$columnName: $columnValue</span><br>";
             else if($columnName != "Image")
                 $infoStr .= "$columnName: $columnValue<br>";
         }
         $i++;
+        // $sciName = $row['SciName'];
+        // $viewFormUpdate = "
+        // <form method='post' action='functions.php'>
+        // <input type='submit' name='UpdateViewCount'>
+        // <input type='hidden' name='SciName' value='$sciName'>
+        // </form>
+        // ";
+
         $infoStr .= "</div>";
         $gridStr .= "$infoStr</div>\n    ";
     }
@@ -24,22 +35,21 @@ function buildGrid($data) {
     return $gridStr;
 }
 
-function iterateCount($data) {
-    if (isset($_POST["update"])) {
-    $tableToUpdate = htmlspecialchars($_POST["update_data"]);
-    $plantToUpdate = htmlspecialchars($_POST["update_id"]);
+if (isset($_POST["UpdateViewCount"]) && isset($_POST["SciName"])) {
+    $SciName = $_POST["SciName"];
 
-	$db = getConnection();
-    $query = $db->prepare("update Plant set ViewCount = ViewCount + 1 where SciName= ?");
-    $query->bind_param("v", $plantToUpdate);
-    if ($query->execute()) {    
-        header( "Location: " . $_SERVER['PHP_SELF']);
+    $db = getConnection();
+
+    $update = $db->prepare("update Plant set ViewCount = ViewCount + 1 where SciName = ?");
+
+    $update->bind_param("s", $SciName);
+
+    if ($update->execute()) {
+        header("Location: plog.php");
     }
     else {
-        echo "Error updating: " . mysqli_error();
-    }
+        echo "Error: " . mysqli_error();
     }
 }
-
 
 ?>
