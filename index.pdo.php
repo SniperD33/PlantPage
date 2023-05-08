@@ -109,7 +109,7 @@ $user = get_user_info($_SESSION["email"]);
 //show all personal plants
 function get_personal_plants($email) {
     $db = get_pdo_connection();
-    $query = $db->prepare("SELECT SciName as ScientificName, PPName as NickName, DateAdd as DateAdded, HomeEnv FROM PersonalPlant WHERE Email = ? order by ScientificName");
+    $query = $db->prepare("SELECT  PPName as NickName, SciName as ScientificName,DateAdd as DateAdded, HomeEnv FROM PersonalPlant WHERE Email = ? order by NickName");
     $query->bindParam(1, $email, PDO::PARAM_STR);
     $query->execute();
     $rows = $query->fetchAll(PDO::FETCH_ASSOC); //rows is a php associate array
@@ -121,7 +121,7 @@ $pplants = get_personal_plants($_SESSION["email"]);
 //show personal plant tasks
 function get_plant_task($email) {
     $db = get_pdo_connection();
-    $query = $db->prepare("SELECT PPName as Nickname, Tname as Task, TDescrip as Description, Notes, PerformAgain FROM Performs natural join Task natural join PersonalPlant WHERE Email = ?");
+    $query = $db->prepare("SELECT PPName as Nickname, Tname as Task, TDescrip as Description, Notes, PerformAgain FROM Performs natural join Task natural join PersonalPlant WHERE Email = ? order by PPName");
     $query->bindParam(1, $email, PDO::PARAM_STR);
     $query->execute();
     $rows = $query->fetchAll(PDO::FETCH_ASSOC); //rows is a php associate array
