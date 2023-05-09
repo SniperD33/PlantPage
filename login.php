@@ -120,7 +120,7 @@ if (isset($_POST["Login"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?= $PROJECT_NAME . " Login" ?></title>
-    <link rel="stylesheet" type="text/css" href="loginstyle.css">
+    <link rel="stylesheet" type="text/css" href="login-register-style.css">
 </head>
 <body>
 
