@@ -46,7 +46,8 @@
 
 <?php
 
-require_once "config.php";
+require_once("config.php");
+require_once("sqlTools.php");
 
 if (isset($_SESSION["error"])) {
     echo "Something went wrong<br>";
