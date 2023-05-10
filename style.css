@@ -69,3 +69,19 @@ input[type="submit"]:hover {
     color: white;
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.left, .right {
+    width: 48%;
+    box-sizing: border-box;
+    float: left;
+}
+
+.right {
+    float: right;
+}
