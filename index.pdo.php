@@ -39,8 +39,11 @@ if (isset($_POST["update"])
 
 // INSERT
 //to add a new PersonalPlant --> 
-if (isset($_POST["insert"]) 
-    && !empty($_POST["insert_data1"])
+if (isset($_POST["insert"])) {
+    $db = get_pdo_connection(); //1.get connection save into var 
+    $query = false;
+
+    if (!empty($_POST["insert_data1"])  //to add a new plant
     && !empty($_POST["insert_data2"])
     && !empty($_POST["insert_data3"])) {
     $dataToInsert1 = htmlspecialchars($_POST["insert_data1"]);
@@ -48,12 +51,23 @@ if (isset($_POST["insert"])
     $dataToInsert3 = htmlspecialchars($_POST["insert_data3"]);
     echo "inserting $dataToInsert2 ...";
 
-    $db = get_pdo_connection(); //1.get connection save into var
     $query = $db->prepare("CALL AddPersonalPlant(?, ?, ?, ?)");   //2.prepare statement
     $query->bindParam(1, $email1, PDO::PARAM_STR);    //3. bind parameter
     $query->bindParam(2, $dataToInsert1, PDO::PARAM_STR);
     $query->bindParam(3, $dataToInsert2, PDO::PARAM_STR);
-    $query->bindParam(4, $dataToInsert3, PDO::PARAM_STR);
+    $query->bindParam(4, $dataToInsert3, PDO::PARAM_STR);   }
+    else if (!empty($_POST["insert_data_task1"]) 
+    && !empty($_POST["insert_data_task2"]))   {         //to add a task
+        $dataToInsert1 = htmlspecialchars($_POST["insert_data_task1"]);
+        $dataToInsert2 = htmlspecialchars($_POST["insert_data_task2"]);
+        echo "inserting $dataToInsert2 ...";
+    
+        $query = $db->prepare("CALL AddPPTask(?, ?, ?)");   //2.prepare statement
+        $query->bindParam(1, $email1, PDO::PARAM_STR);    //3. bind parameter
+        $query->bindParam(2, $dataToInsert1, PDO::PARAM_STR);
+        $query->bindParam(3, $dataToInsert2, PDO::PARAM_STR);
+  
+    }
     if ($query->execute()) {    //4.execute
         header( "Location: " . $_SERVER['PHP_SELF']);//refreshes page so new data inserted shows
     }
@@ -64,18 +78,32 @@ if (isset($_POST["insert"])
 }
 
 
-// DELETE
+
+// DELETE PPlant or DELETE planttask 
 if (isset($_POST["delete"])) {
 
     echo "deleting...<br>";
 
     $db = get_pdo_connection();
     $query = false;
-    if (!empty($_POST["delete_data"])) {
-        echo "deleting by data...";
-        $query = $db->prepare("delete from PersonalPlant where Email = ? AND PPName = ?");
+    if (!empty($_POST["delete_data"])) {    //delete plant
+        echo "deleting plant...";
+        $query = $db->prepare("delete from PersonalPlant where Email = ? AND PPName = ? ");
         $query->bindParam(1, $email1, PDO::PARAM_STR); 
         $query->bindParam(2, $_POST["delete_data"], PDO::PARAM_STR);
+    }
+    else if (!empty($_POST["delete_data1"]) && !empty($_POST["delete_data2"])) {
+        echo "deleting task...";    //delete task
+        $query = $db->prepare("DELETE FROM Performs
+        WHERE PerformID IN (
+          SELECT P.PerformID
+          FROM Performs as P
+          JOIN Task as T ON P.TaskID = T.TaskID
+          JOIN PersonalPlant as PP ON P.PPID = PP.PPID
+          WHERE PP.Email = ? AND T.TName = ? AND PP.PPName = ?);");
+        $query->bindParam(1, $email1, PDO::PARAM_STR);
+        $query->bindParam(2, $_POST["delete_data1"], PDO::PARAM_STR);
+        $query->bindParam(3, $_POST["delete_data2"], PDO::PARAM_STR);
     }
     if ($query) {
         if ($query->execute()) {
@@ -94,6 +122,7 @@ if (isset($_POST["delete"])) {
 }
 
 
+
 // select * from AccountHolder
 function get_user_info($email) {
     $db = get_pdo_connection();
@@ -105,6 +134,8 @@ function get_user_info($email) {
     return $results;
 }
 $user = get_user_info($_SESSION["email"]);
+
+
 
 //show all personal plants
 function get_personal_plants($email) {
@@ -170,6 +201,62 @@ echo makeTable($pplants);
 echo makeTable($pplanttask);
 ?>
 
+<!-- --------------->
+
+<div class="container">
+<div class="left">
+
+
+<!--to add a new PersonalPlant -->
+<div style="text-align:center;">
+<h2>Add Personal Plant</h2>
+</div>
+<?php
+$insert_form = new PhpFormBuilder();
+$insert_form->set_att("method", "POST");
+
+
+$insert_form->add_input("Plant being added", array(
+    "type" => "text"
+), "insert_data1");
+
+$insert_form->add_input("Nickname", array(
+    "type" => "data"
+), "insert_data2");
+
+$insert_form->add_input("Home environment", array(
+    "type" => "data"
+), "insert_data3");
+
+$insert_form->add_input("Insert", array(
+    "type" => "submit",
+    "value" => "Insert"
+), "insert");
+$insert_form->build_form();
+?>
+
+<!-- delete personal plant -->
+<div style="text-align:center;">
+<h2>Delete Personal Plant</h2>
+</div>
+
+<?php
+$delete_form = new PhpFormBuilder();
+$delete_form->set_att("method", "POST");
+$delete_form->add_input("Plant to delete", array(
+    "type" => "text"
+), "delete_data");
+$delete_form->add_input("Delete", array(
+    "type" => "submit",
+    "value" => "Delete"
+), "delete");
+$delete_form->build_form();
+?>
+</div>
+
+
+<div class="right">
+
 <!--update task-->
 <div style ="text-align:center;">
 <h2>Update Task</h2>
@@ -199,26 +286,46 @@ $update_form->build_form();
 ?>
 
 
-<!--to add a new PersonalPlant -->
+<!-- delete task -->
 <div style="text-align:center;">
-<h2>Add Personal Plant</h2>
+<h2>Delete Task</h2>
+</div>
+
+<?php
+$delete_form2 = new PhpFormBuilder();
+$delete_form2->set_att("method", "POST");
+$delete_form2->add_input("Task to delete", array(
+    "type" => "text"
+), "delete_data1");
+
+$delete_form2->add_input("For what plant", array(
+    "type" => "text"
+), "delete_data2");
+
+$delete_form2->add_input("Delete", array(
+    "type" => "submit",
+    "value" => "Delete"
+), "delete");
+$delete_form2->build_form();
+?>  
+
+
+<!--to add a new task -->
+<div style="text-align:center;">
+<h2>Add Task</h2>
 </div>
 <?php
 $insert_form = new PhpFormBuilder();
 $insert_form->set_att("method", "POST");
 
 
-$insert_form->add_input("Plant being added", array(
+$insert_form->add_input("Task being added", array(
     "type" => "text"
-), "insert_data1");
+), "insert_data_task1");
 
-$insert_form->add_input("Nickname for plant", array(
+$insert_form->add_input("For what plant", array(
     "type" => "data"
-), "insert_data2");
-
-$insert_form->add_input("Home environment", array(
-    "type" => "data"
-), "insert_data3");
+), "insert_data_task2");
 
 $insert_form->add_input("Insert", array(
     "type" => "submit",
@@ -228,22 +335,9 @@ $insert_form->build_form();
 ?>
 
 
-<div style="text-align:center;">
-<h2>Delete Personal Plant</h2>
 </div>
 
-<?php
-$delete_form = new PhpFormBuilder();
-$delete_form->set_att("method", "POST");
-$delete_form->add_input("Plant to delete", array(
-    "type" => "text"
-), "delete_data");
-$delete_form->add_input("Delete", array(
-    "type" => "submit",
-    "value" => "Delete"
-), "delete");
-$delete_form->build_form();
-?>
+</div>
 
 
 
