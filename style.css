@@ -1,3 +1,4 @@
+
 /* style.css */
 body {
     font-family: Arial, sans-serif;
@@ -89,3 +90,91 @@ input[type="submit"]:hover {
 tr {
     border: .7mm ridge 
     #1a3d2c}
+header{
+	padding: 10px;
+	width:100%;
+}
+h1{
+	text-align: center;
+	font-family: fantasy;
+	font-weight: bolder;
+}
+h2{
+	text-align: center;
+	font-family: fantasy;
+	font-weight: lighter;
+}
+body{
+	width: 100%;
+	height: 100%;
+}
+
+/* navigation bar styling */ 
+
+.wrapper .sidenav {
+	height: 100%;
+	width: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding-top: 40px;
+	background-color: #225c40;
+	list-style: none;
+}
+
+.sidenav li a {
+	padding: 8px;
+	font-size: 18px;
+	display: block;
+	text-decoration: none;
+	color: white;
+}
+
+
+.wrapper .sidenav li a:hover,
+.wrapper .sidenav li a.active{
+    color: #1a3d2c;
+    background:white;
+    border-right: 2px solid rgb(5, 68, 104);
+}
+
+
+/* footer styling */ 
+
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: black;
+	text-align: right;
+}
+
+
+footer p {
+	margin-right: 20px;
+}
+
+
+/* content styling */
+
+.content{
+	float: right;
+	height: fit-content;
+	width: 100%;
+	border: 1px solid black;
+	outline: 5px;
+	outline-style: double;
+	margin: 5px;
+}
+.allImages{
+	float: left;
+	width: 15%;
+}
+#info {
+	display: none;
+}
+img {
+	margin: auto;
+	display: block;
+}

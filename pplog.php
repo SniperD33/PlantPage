@@ -167,7 +167,6 @@ $pplanttask = get_plant_task($_SESSION["email"]);
 
 
 ?>
-<!--////////////////////////////////////////////////////////////////////-->
 
 <html>
 <head>
@@ -352,8 +351,6 @@ $insert_form->build_form();
 </div>
 
 </div>
-
-
-
-
-
+	<footer> <p> Plant Page</p></footer>
+</body>
+</html>

@@ -1,7 +1,6 @@
 <?php
 require_once("config.php");
 
-
 function get_admin($email) {
     $db = get_pdo_connection();
     $query = $db->prepare("SELECT * FROM Admin WHERE Email = ?");
@@ -36,11 +35,11 @@ if (isset($_POST["Login"])) {
             $hash = $results[0]["HashPass"];
             // first row in results for column HashPass
 
-            if (password_verify($login_password, $hash)) {  //if pw match
-                $_SESSION["logged_in"] = true;      //set they are logged in
-                $_SESSION["email"] = $login_email;  //make the session email the email used to log in
+            if (password_verify($login_password, $hash)) {
+                $_SESSION["logged_in"] = true;
+                $_SESSION["email"] = $login_email;
 
-                header("Location: index.php");  // and redirect to index page;
+                header("Location: home.php");
             }
             else { 
                 $_SESSION["login_error"] = "Invalid email and password combination.";
@@ -67,7 +66,7 @@ if (isset($_POST["Login"])) {
                 $_SESSION["logged_in"] = true;
                 $_SESSION["email"] = $login_email;
 
-                header("Location: index.php");
+                header("Location: home.php");
             }
             else { 
                 $_SESSION["login_error"] = "Invalid email and password combination.";
@@ -77,8 +76,6 @@ if (isset($_POST["Login"])) {
             $_SESSION["login_error"] = "Invalid email and password combination.";
         }
     }
-    
-}
 ?>
 
 <html>
@@ -87,6 +84,7 @@ if (isset($_POST["Login"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?= $PROJECT_NAME . " Login" ?></title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="login-register-style.css">
 </head>
 <body>
 
