@@ -16,21 +16,66 @@ body{
 	width: 100%;
 	height: 100%;
 }
+
+/*
 div{
 	width: auto;
 	border: 2.5px solid black;
 	padding: 10px;
 	margin: 20px;
 }
-footer{
-	text-align: center;
-	padding: 1px;
-	background-color: green;
-	color: white;
-	font-family: fantasy;
-	font-weight: lighter;
-	border: 5px solid black;
+*/
+
+
+/* navigation bar styling */ 
+
+.wrapper .sidenav {
+	height: 100%;
+	width: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding-top: 40px;
+	background-color: #225c40;
+	list-style: none;
 }
+
+.sidenav li a {
+	padding: 8px;
+	font-size: 18px;
+	display: block;
+	text-decoration: none;
+	color: white;
+}
+
+
+.wrapper .sidenav li a:hover,
+.wrapper .sidenav li a.active{
+    color: #1a3d2c;
+    background:white;
+    border-right: 2px solid rgb(5, 68, 104);
+}
+
+
+/* footer styling */ 
+
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: black;
+	text-align: right;
+}
+
+
+footer p {
+	margin-right: 20px;
+}
+
+
+/* content styling */
+
 .content{
 	float: right;
 	height: fit-content;
@@ -44,10 +89,47 @@ footer{
 	float: left;
 	width: 15%;
 }
+/* plog styling */
+#plogcontent {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%/2, max(256px, 100%/5)), 1fr));
+	grid-gap: 20px;
+	justify-items: center;
+	align-items: stretch;
+    overflow-x: hidden;
+}
+.plogtitle + .ploginfo {
+	width: 256px;
+  	height: 256px;
+  	max-width: 100%;
+	text-align: center;
+}
+.ploginfo {
+	text-align: center;
+    border: 3mm ridge rgb(60 150 0 / 60%);
+    background-color: #b9fa8c;
+}
+.plantImg {
+	max-width:100%;
+	max-height:400px;
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+}
+.allImages{
+	float: left;
+	width: 15%;
+}
 #info {
 	display: none;
+	text-align: center;
 }
 img {
 	margin: auto;
 	display: block;
+    border: 3mm ridge rgb(180 140 110);
+}
+
+tr {
+	border: 3mm ridge rgb(180 140 110);
 }
