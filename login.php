@@ -1,6 +1,5 @@
 <?php
 require_once("config.php");
-require_once("sqlTools.php");
 
 function get_admin($email) {
     $db = get_pdo_connection();
@@ -77,42 +76,6 @@ if (isset($_POST["Login"])) {
             $_SESSION["login_error"] = "Invalid email and password combination.";
         }
     }
-    /*else {
-        $db = get_pdo_connection();
-        $query = $db->prepare("SELECT HashPass FROM AccountHolder WHERE Email = ?");
-        $query->bindParam(1, $login_email, PDO::PARAM_STR);
-        $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        if (count($results) > 0) {
-            $hash = $results[0]["HashPass"];
-            // first row in results for column HashPass
-
-            if (password_verify($login_password, $hash)) {
-                $_SESSION["logged_in"] = true;
-                $_SESSION["email"] = $login_email;
-
-                $admin = get_admin($login_email);
-
-                
-                if (count($admin) > 0) {
-                    $_SESSION["is_admin"] = true;
-                    //$_SESSION["managed_dept"] = $admin[0];
-                }
-                else {
-                    $_SESSION["is_admin"] = false;
-                }
-                header("Location: home.php");
-            }
-            else { 
-                $_SESSION["login_error"] = "Invalid email and password combination.";
-            }
-        }
-        else {
-            $_SESSION["login_error"] = "Invalid email and password combination.";
-        }
-    }*/
-}
 ?>
 
 <html>
@@ -120,6 +83,7 @@ if (isset($_POST["Login"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?= $PROJECT_NAME . " Login" ?></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="login-register-style.css">
 </head>
 <body>

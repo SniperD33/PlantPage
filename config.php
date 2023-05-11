@@ -1,6 +1,6 @@
 <?php
 
-// Change this to your project name
+//error reporting
 $PROJECT_NAME = "CMPS 3420 Project Plant Page";
 
 date_default_timezone_set('America/Los_Angeles');
@@ -15,13 +15,14 @@ and then uncomment line 15 and change the file path. Use an absolute path,
 not a relative path. e.g. /home/stu/jcox/php_errors.log
 */
 
-// ini_set("error_log", "/home/fac/nick/php_errors.log");
+// ini_set("error_log", "/home/stu/jmiranda/php_errors.log");
 
 // Starts a PHP session and gives the client a cookie :3
 // Will be useful for other features, like staying logged in.
+//start a session
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}
+}   
 
 // Establishes a connection to the MariaDB database 
 function get_mysqli_connection() {
@@ -33,7 +34,7 @@ function get_mysqli_connection() {
             'plantpage', // the MariaDB username
 	    'egaptnalp3420S23', // the MariaDB username's password
             'plantpage' // the MariaDB database name
-        ) or die(mysqli_connect_error());
+         ) or die(mysqli_connect_error());
     }
     if ($connection === false) {
         echo "Unable to connect to database<br/>";
@@ -78,25 +79,6 @@ function get_pdo_connection() {
 }
 
 
-<?php
-
-$PROJECT_NAME = "Plant Page";
-
-date_default_timezone_set('America/Los_Angeles');
-error_reporting(E_ALL);
-ini_set("log_errors", 1);
-ini_set("display_errors", 1);
-
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Establishes a connection to the MariaDB database 
-// Gets a connection to the database using PHP Data Objects (PDO)
-
-
-// This includes a form builder PHP class that lets you generate HTML forms
-// from PHP. See the repo here: https://github.com/joshcanhelp/php-form-builder
 require_once("FormBuilder.php");
 
 // This includes a function called makeTable that accepts a PHP array of 
