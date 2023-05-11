@@ -5,12 +5,12 @@ function buildGrid($data) {
 
     $i = 1;
     foreach($data as $row) {
-        $gridStr .= "<div class ='$i'> ";
-        $infoStr = "<div class='info'>";
+        $gridStr .= "<div class ='plogtitle'> ";
+        $infoStr = "<div class='ploginfo'>";
         foreach($row as $columnName => $columnValue) {
             if($columnName == "SciName")
                 $gridStr .= sprintf("<h1>$columnValue</h1>");
-            else
+            else if($columnName != "Image")
                 $infoStr .= "$columnName: $columnValue<br>";
         }
         $i++;

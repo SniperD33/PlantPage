@@ -80,7 +80,7 @@ footer p {
 	float: right;
 	height: fit-content;
 	width: 100%;
-	border 1px solid black;
+	border: 1px solid black;
 	outline: 5px;
 	outline-style: double;
 	margin: 5px;
@@ -89,4 +89,10 @@ footer p {
 	float: left;
 	width: 15%;
 }
-
+#info {
+	display: none;
+}
+img {
+	margin: auto;
+	display: block;
+}
