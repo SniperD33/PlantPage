@@ -20,6 +20,38 @@ function closeConnection($conn){
 		die(mysqli_error($conn));
 	}
 }
+function get_pdo_connection() {
+    static $conn;
+
+    if (!isset($conn)) {
+        try {
+            // Make persistent connection
+            $options = array(
+                PDO::ATTR_PERSISTENT => true
+            );
+
+            $conn = new PDO(
+                "mysql:host=localhost;dbname=plantpage",  // change dbname
+                "plantpage",                          // change username
+                "egaptnalp3420S23",                      // change password
+                $options);
+        }
+        catch (PDOException $pe) {
+            echo "Error connecting: " . $pe->getMessage() . "<br>";
+            die();
+        }
+        
+    }
+
+    if ($conn === false) {
+        echo "Unable to connect to database<br/>";
+        die();
+    }
+  
+    return $conn;
+    
+
+}
 function addPersonalPlant($pplant){
 	$conn = getConnection();
 	

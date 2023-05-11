@@ -1,3 +1,7 @@
+<?php
+require_once("sqlTools.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +14,23 @@
 		<h1>Plant Page</h1>
 	</div>
 	<div id="navigation">
-		<a href="pplog.html">Personal Plant Log</a>
-		<a href="title.html">Brought to You by</a>
-		<a href="home.html">Home</a>
+		<a href="pplog.php">Personal Plant Log</a>
+		<a href="title.php">Brought to You by</a>
+		<a href="home.php">Home</a>
 	</div>
 	<div id="content">
+
+	<?php
+	
+	$db = getConnection();
+	$query = $db->prepare("SELECT * FROM Plant");
+	$query->execute();
+
+	$result = $query->get_result();
+	$rows = $result->fetch_all(MYSQLI_ASSOC);
+
+	echo buildGrid($rows);
+	?>
 
 	</div>
 
