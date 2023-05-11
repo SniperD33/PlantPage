@@ -179,7 +179,17 @@ $pplanttask = get_plant_task($_SESSION["email"]);
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+   <style>
+    body {
+        background-color: #d2fab9;
+    }
+</style>
 <h1>Plant Log</h1>
+    <div id="navigation">
+        <a href="plog.php">Plant Dictionary</a>
+        <a href="pplog.php">Personal Plant Log </a>
+        <a href="title.php">Brought to You by</a>
+</div>
 
 <?php
 if (!empty($_SESSION["affected_rows"])) {
