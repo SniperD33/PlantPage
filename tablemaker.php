@@ -16,7 +16,12 @@ function makeTable($data, $showHeader = true) {
         }
         $tableStr .= "<tr>";
         foreach($row as $columnName => $columnValue) {
-            $tableStr .= sprintf("<td>%s</td>", $columnValue);
+            if($columnName == "Image" && $columnValue != NULL){
+                $tableStr .= sprintf("<img id='img' class = 'plantImg' src = $columnValue>");
+            }
+            else{
+                $tableStr .= sprintf("<td>%s</td>", $columnValue);
+            }
         }
         $tableStr .= "</tr>";
     }
