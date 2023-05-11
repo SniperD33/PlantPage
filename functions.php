@@ -4,14 +4,16 @@ require_once("sqlTools.php");
 function buildGrid($dataPlant, $dataCare, $dataProb) {
     $gridStr = "";
 
+
     $i = 1;
     foreach($dataPlant as $row) {
         $gridStr .= "<div class ='plogtitle'> ";
         $infoStr = "<div id='info$i' class='ploginfo' style='display: none'>";
+        $infoStr .= "<h3>Plant Information</h3>";
         $sciName = $row['SciName'];
         foreach($row as $columnName => $columnValue) {
             if($columnName == "Image" && $columnValue != NULL)
-                $gridStr .= sprintf("<img id='img$i' src=$columnValue onclick='showDivViewPlants(\"info$i\", \"$sciName\");'>");
+                $gridStr .= sprintf("<img id='img$i' class = 'plantImg' src=$columnValue onclick='showDivViewPlants(\"info$i\", \"$sciName\");'>");
             else if($columnName == "SciName")
                 $gridStr .= sprintf("<h1>$columnValue</h1>");
             else if($columnName == "ViewCount")
@@ -19,7 +21,6 @@ function buildGrid($dataPlant, $dataCare, $dataProb) {
             else if($columnName != "Image")
                 $infoStr .= "$columnName: $columnValue<br>";
         }
-
         $careStr = "<h3>Care Info</h3>";
         $probStr = "<h3>Common Problems</h3>";
         foreach($dataCare as $row2) {

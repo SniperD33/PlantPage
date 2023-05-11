@@ -17,6 +17,11 @@ if ($_SESSION["logged_in"] == false) {
 	<title>Plants Page</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="functions.js"></script>
+	<style>
+		body {
+			background-color: #d2fab9;
+		}
+	</style>
 </head>
 <body>
 	<div id="header">
@@ -27,7 +32,7 @@ if ($_SESSION["logged_in"] == false) {
 		<a href="title.php">Brought to You by</a>
 		<a href="home.php">Home</a>
 	</div>
-	<div id="content">
+	<div id="plogcontent">
 
 	<?php
 	
