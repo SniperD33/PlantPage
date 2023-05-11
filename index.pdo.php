@@ -9,6 +9,10 @@ if ($_SESSION["logged_in"] == false) {
     header("Location: login.php");
 }
 
+if ($_SESSION["is_admin"] == true) {
+    header("Location: login.php");
+}
+
 
 // Handle any inserts/updates/deletes before outputting any HTML
 $email1 = htmlspecialchars($_SESSION["email"]);
