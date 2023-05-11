@@ -35,7 +35,7 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #c6fce1;
+    background-color: #d7f6d2;
     color: rgb(0, 11, 5);
 }
 
@@ -85,3 +85,7 @@ input[type="submit"]:hover {
 .right {
     float: right;
 }
+
+tr {
+    border: .7mm ridge 
+    #1a3d2c}
